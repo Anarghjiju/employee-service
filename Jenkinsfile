@@ -7,13 +7,13 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git url: 'https://github.com/Anarghjiju/authentication-service.git', branch: 'main'
+                git url: 'https://github.com/Anarghjiju/employee-service.git.git', branch: 'main'
             }
         }
         stage('Pre_Build'){
             steps {
-                bat "docker rm -f auth_container"
-                bat "docker rmi -f auth_image"
+                bat "docker rm -f emp_container"
+                bat "docker rmi -f emp_image"
             }
         }
         stage('Build') {
@@ -29,8 +29,8 @@ pipeline {
         stage('Deploy') {
             steps {
 
-                bat "docker build -t auth_image ."
-                bat "docker run -p 8090:8090 -d --name auth_container auth_image"
+                bat "docker build -t emp_image ."
+                bat "docker run -p 8082:8082 -d --name emp_container emp_image"
             }
         }
     }
